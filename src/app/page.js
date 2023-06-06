@@ -4,6 +4,7 @@ export default function app() {
   return (
     <ul>
       <Sidebar />
+      <button class="rounded-full">Tweet</button>
     </ul>
   );
 }

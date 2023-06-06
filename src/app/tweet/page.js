@@ -1,8 +1,7 @@
-export default function TweetPage() {
+export default function Tweet() {
     return (
       <div>
-        <h1>Tweet Page</h1>
+        <button>Tweet</button>
       </div>
     );
   }
-  

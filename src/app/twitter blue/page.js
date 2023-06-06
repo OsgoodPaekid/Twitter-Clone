@@ -1,8 +1,7 @@
-export default function TwitterBluePage() {
+export default function TwitterBlue() {
     return (
       <div>
-        <h1>Twitter Blue Page</h1>
+        <h1>TwitterBlue Page</h1>
       </div>
     );
   }
-  

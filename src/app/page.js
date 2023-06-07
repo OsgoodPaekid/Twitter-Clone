@@ -1,10 +1,10 @@
-import Sidebar from "../../components/Sidebar/page";
+import Sidebar from "components/Sidebar";
 
-export default function app() {
+
+export default function Home() {
   return (
     <ul>
-      <Sidebar />
-      <button class="rounded-full">Tweet</button>
+      <li><Sidebar /> </li>
     </ul>
   );
 }

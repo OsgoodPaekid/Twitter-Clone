@@ -1,3 +1,4 @@
+import { Sidebar } from "@/components/sidebar";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -12,8 +13,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="w-screen h-screen p-8">
-          <div>{children}</div>
+        <div className="flex w-screen h-screen bg-white px-24">
+          <div className="w-1/4 border-r border-gray-300">
+            <Sidebar />
+          </div>
+          <div className="w-1/2">{children}</div>
+          <div className="w-1/4 border-l border-gray-300">widgets</div>
         </div>
       </body>
     </html>

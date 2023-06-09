@@ -1,6 +1,13 @@
 "use-client";
 import Link from "next/link";
 import { BiHomeAlt as BiHome } from "react-icons/bi";
+import {FiSearch} from "react-icons/fi"
+import {IoNotificationsOutline} from "react-icons/io5";
+import {BiEnvelope} from "react-icons/bi";
+import {BsBookmark} from "react-icons/bs";
+import {CiViewList} from "react-icons/ci";
+import {CgProfile} from "react-icons/cg";
+import {CgMoreO} from "react-icons/cg";
 
 export function Sidebar() {
   const defaultIconSize = 26;
@@ -13,37 +20,37 @@ export function Sidebar() {
     {
       title: "Explore",
       link: "/explore",
-      icon: <BiHome size={defaultIconSize} />,
+      icon: <FiSearch size={defaultIconSize} />,
     },
     {
       title: "Notifications",
       link: "/notifications",
-      icon: <BiHome size={defaultIconSize} />,
+      icon: <IoNotificationsOutline size={defaultIconSize} />,
     },
     {
       title: "Messages",
       link: "/messages",
-      icon: <BiHome size={defaultIconSize} />,
+      icon: <BiEnvelope size={defaultIconSize} />,
     },
     {
       title: "Bookmarks",
       link: "/bookmarks",
-      icon: <BiHome size={defaultIconSize} />,
+      icon: <BsBookmark size={defaultIconSize} />,
     },
     {
       title: "Lists",
       link: "/lists",
-      icon: <BiHome size={defaultIconSize} />,
+      icon: <CiViewList size={defaultIconSize} />,
     },
     {
       title: "Profile",
       link: "/profile",
-      icon: <BiHome size={defaultIconSize} />,
+      icon: <CgProfile size={defaultIconSize} />,
     },
     {
       title: "More",
       link: "/more",
-      icon: <BiHome size={defaultIconSize} />,
+      icon: <CgMoreO size={defaultIconSize} />,
     },
   ];
   return (
@@ -62,8 +69,8 @@ export function Sidebar() {
           </Link>
         ))}
       </div>
-      <div className="bg-cyan-600 p-3 text-lg text-white rounded-full">
-        <p className="text-center">Tweet</p>
+      <div className="bg-blue-500 p-3 text-lg text-white rounded-full">
+        <p className="text-center bg-blue-500">Tweet</p>
       </div>
     </div>
   );

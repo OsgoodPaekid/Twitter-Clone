@@ -69,9 +69,9 @@ export function Sidebar() {
           </Link>
         ))}
       </div>
-      <div className="bg-blue-500 p-3 text-lg text-white rounded-full">
-        <p className="text-center bg-blue-500">Tweet</p>
-      </div>
+      <Link href="./tweet">
+        <button className="bg-blue-500 p-3 text-lg text-white rounded-full text-center pl-12 pr-12">Tweet</button>
+      </Link>
     </div>
   );
 }

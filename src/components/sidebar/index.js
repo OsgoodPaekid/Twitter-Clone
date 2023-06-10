@@ -1,13 +1,11 @@
 "use-client";
 import Link from "next/link";
-import { BiHomeAlt as BiHome } from "react-icons/bi";
-import {FiSearch} from "react-icons/fi"
-import {IoNotificationsOutline} from "react-icons/io5";
-import {BiEnvelope} from "react-icons/bi";
-import {BsBookmark} from "react-icons/bs";
-import {CiViewList} from "react-icons/ci";
-import {CgProfile} from "react-icons/cg";
-import {CgMoreO} from "react-icons/cg";
+import { BiHomeAlt as BiHome, BiEnvelope } from "react-icons/bi";
+import { FiSearch } from "react-icons/fi";
+import { IoNotificationsOutline } from "react-icons/io5";
+import { BsBookmark } from "react-icons/bs";
+import { CiViewList } from "react-icons/ci";
+import { CgProfile, CgMoreO } from "react-icons/cg";
 
 export function Sidebar() {
   const defaultIconSize = 26;
@@ -69,11 +67,10 @@ export function Sidebar() {
           </Link>
         ))}
       </div>
-      
-        <button className="bg-blue-500 p-3 text-lg text-white rounded-full text-center pl-12 pr-12">
-          Tweet
-        </button>
-     
+
+      <button className="bg-blue-500 p-3 text-lg text-white rounded-full text-center pl-12 pr-12">
+        Tweet
+      </button>
     </div>
   );
 }

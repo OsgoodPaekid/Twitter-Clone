@@ -1,5 +1,24 @@
-export function Feed(){
+export function FeedItem(props){
     return(
-        
+        <div>
+            <div>
+                <div>
+                    <img>{props.avatar}</img>
+                </div>
+                <div>
+                    <div>
+                        <div>{props.username}</div>
+                        <span>{props.time}</span>
+                        <div>{props.tweet}</div>
+                    </div>
+                    <div>
+                        <div>{props.comment}</div>
+                        <div>{props.retweet}</div>
+                        <div>{props.likes}</div>
+                        <div>{props.tweetImpressions}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 }

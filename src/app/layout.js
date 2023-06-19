@@ -1,6 +1,7 @@
 import { Sidebar } from "@/components/sidebar";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import {FeedItem } from "@/components/feed"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,7 @@ export default function RootLayout({ children }) {
           <div className="w-1/4 border-r border-gray-300">
             <Sidebar />
           </div>
-          <div className="w-1/2">{children}</div>
+          <div className="w-1/2">{children} <FeedItem /> </div>
           <div className="w-1/4 border-l border-gray-300">widgets</div>
         </div>
       </body>

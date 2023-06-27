@@ -1,39 +1,32 @@
-import {FaRegComment } from "react-icons/fa"
-import {AiOutlineRetweet} from "react-icons/ai"
-import {MdFavoriteBorder} from "react-icons/md"
-import {VscGraph} from "react-icons/vsc"
-import {LuShare} from "react-icons/lu"
-import Image from "next/image";
 import { FeedItem } from "@/components/feed"
 
 
 export default function Home() {
+
       const items = [{
         id: 1,
-        avatar: <Image src="/profile.svg" alt="Image Description" width={80} height={30} className="rounded-full" />,
+        avatar: "https://ionicframework.com/docs/img/demos/avatar.svg",
         username: "Osgood",
-        handle: "osgoodpaekid",
-        time: 4,
+        handle: "@osgoodpaekid",
+        // time: new Date().toISOString().slice(11, 19),
+        time: new Date().getHours(),
         tweet: "reasons why a lot of developers choose next js",
-        comment: <FaRegComment />,
-        retweet: <AiOutlineRetweet />, 
-        likes: <MdFavoriteBorder />,
-        tweetImpressions: <VscGraph />,
-        share: <LuShare />       
+        comment: 50,
+        retweet: 31, 
+        likes: 1000,
+        tweetImpressions: 5000
     }]
 
-    const tweetItems = items.map(item => {
+    return(
+      <div>
+        {items.map(item => {
       return(
         <FeedItem 
           key={item.id}
           {...item}
         />
       )
-    })
-
-    return(
-      <div>
-        {tweetItems}
+    })}
       </div>
     )
 }

@@ -9,7 +9,7 @@ export default function Home() {
         username: "Osgood",
         handle: "@osgoodpaekid",
         // time: new Date().toISOString().slice(11, 19),
-        time: new Date().getHours(),
+        // createdAt: new Date().getHours(),
         tweet: "reasons why a lot of developers choose next js",
         comment: 50,
         retweet: 31, 

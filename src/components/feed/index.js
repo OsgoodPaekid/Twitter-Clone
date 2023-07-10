@@ -3,32 +3,10 @@ import {AiOutlineRetweet} from "react-icons/ai"
 import {MdFavoriteBorder} from "react-icons/md"
 import {VscGraph} from "react-icons/vsc"
 import {LuShare} from "react-icons/lu"
+import { formatDate } from "../../../utilities/formateDate"
 
 
 export function FeedItem(props){
-  
-  function formatDate(){
-    
-    const past = new Date('2023-07-07');
-    const now = new Date();
-
-    const result = now - past;
-    const seconds = Math.floor(result / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-
-      if (days > 0) {
-      return (`${days}d`);
-    } else if (hours > 0) {
-      return (`${hours}h`);
-    } else if (minutes > 0) {
-      return(`${minutes}m`);
-    } else {
-      return(`${seconds}s`);
-    }
-  };
-
   return(
     <div>
         <div className="flex">

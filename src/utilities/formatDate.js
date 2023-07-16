@@ -9,8 +9,10 @@ export function formatDate(dateString){
     const hours = Math.floor(minutes / 60);
     const days = Math.floor(hours / 24);
 
-      if (days > 0) {
+      if (days < 7) {
       return (`${days}d`);
+    }else if(days > 7){
+      return (`${dateString.slice(0, 10)}`)
     } else if (hours > 0) {
       return (`${hours}h`);
     } else if (minutes > 0) {

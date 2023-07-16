@@ -8,7 +8,7 @@ export default function Home() {
         avatar: "https://ionicframework.com/docs/img/demos/avatar.svg",
         username: "Osgood",
         handle: "@osgoodpaekid",
-        createdAt: new Date('2023-07-07'),
+        createdAt: new Date('2023-07-10').toISOString(),
         tweet: "reasons why a lot of developers choose next js",
         comment: 50,
         retweet: 31, 

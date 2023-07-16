@@ -1,6 +1,6 @@
-export function formatDate(x){
+export function formatDate(dateString){
     
-    const past = new Date(x);
+    const past = new Date(dateString);
     const now = new Date();
 
     const result = now - past;

@@ -3,7 +3,7 @@ import {AiOutlineRetweet} from "react-icons/ai"
 import {MdFavoriteBorder} from "react-icons/md"
 import {VscGraph} from "react-icons/vsc"
 import {LuShare} from "react-icons/lu"
-import { formatDate } from "../../../utilities/formateDate"
+import { formatDate }  from "@/utilities/formatDate"
 
 
 export function FeedItem(props){

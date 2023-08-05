@@ -1,31 +1,39 @@
-import { FeedItem } from "@/components/feed"
+import { FeedItem } from "@/components/feed";
 
+async function getTweets() {
+  const res = await fetch("http://localhost:3333/tweets?_page=1&_limit=10");
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
 
-export default function Home() {
+async function getUsers() {
+  const res = await fetch("http://localhost:3333/users?_page=1&_limit=10");
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+}
 
-      const items = [{
-        id: 1,
-        avatar: "https://ionicframework.com/docs/img/demos/avatar.svg",
-        username: "Osgood",
-        handle: "@osgoodpaekid",
-        createdAt: new Date('2023-07-09').toISOString(),
-        tweet: "reasons why a lot of developers choose next js",
-        comment: 50,
-        retweet: 31, 
-        likes: 1000,
-        tweetImpressions: 5000
-    }]
+export default async function Home() {
+  const [tweets, users] = await Promise.all([getTweets(), getUsers()]);
 
-    return(
-      <div>
-        {items.map(item => {
-      return(
-        <FeedItem 
-          key={item.id}
-          {...item}
-        />
-      )
-    })}
-      </div>
-    )
+  let tweetsWithUser = [];
+  tweetsWithUser = tweets.map((tweet) => {
+    tweet.user = users.find((user) => user.id === tweet.userId);
+    tweet.avatar = "https://i.pravatar.cc/100";
+    tweet.comment = 20;
+    tweet.retweet = 10;
+    tweet.likes = 30;
+    return tweet;
+  });
+
+  return (
+    <div className="flex flex-col space-y-6 px-2 max-h-screen overflow-scroll">
+      {tweetsWithUser.map((tweet) => {
+        return <FeedItem key={tweet.id} {...tweet} />;
+      })}
+    </div>
+  );
 }

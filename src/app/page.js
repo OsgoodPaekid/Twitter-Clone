@@ -1,31 +1,35 @@
-import { FeedItem } from "@/components/feed"
+import { FeedItem } from "@/components/feed";
 
+const getPostsData = async () => {
+  const res = await fetch("http://localhost:3333/tweets");
+  return res.json();
+};
 
-export default function Home() {
+const getUsersData = async () => {
+  const res = await fetch("http://localhost:3333/users");
+  return res.json();
+};
 
-      const items = [{
-        id: 1,
-        avatar: "https://ionicframework.com/docs/img/demos/avatar.svg",
-        username: "Osgood",
-        handle: "@osgoodpaekid",
-        createdAt: new Date('2023-07-09').toISOString(),
-        tweet: "reasons why a lot of developers choose next js",
-        comment: 50,
-        retweet: 31, 
-        likes: 1000,
-        tweetImpressions: 5000
-    }]
+export default async function Home() {
+  const [posts, users] = await Promise.all([getPostsData(), getUsersData()]);
+  let tweetWithUser = [];
 
-    return(
-      <div>
-        {items.map(item => {
-      return(
-        <FeedItem 
-          key={item.id}
-          {...item}
-        />
-      )
-    })}
+  tweetWithUser = posts.map((post) => {
+    post.user = users.find((user) => users.id === posts.id);
+    post.avatar = "https://i.pravatar.cc/100";
+    post.comment = 20;
+    post.retweet = 15;
+    post.likes = 45;
+    return post;
+  });
+
+  return (
+    <div>
+      <div className="flex flex-col space-y-6 px-2 max-h-screen overflow-scroll">
+        {tweetWithUser.map((post) => {
+          return <FeedItem key={post.id} {...post} />;
+        })}
       </div>
-    )
+    </div>
+  );
 }

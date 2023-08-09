@@ -15,7 +15,7 @@ export default async function Home() {
   let tweetWithUser = [];
 
   tweetWithUser = posts.map((post) => {
-    post.user = users.find((user) => users.id === posts.id);
+    post.user = users.find((user) => user.id === post.userId);
     post.avatar = "https://i.pravatar.cc/100";
     post.comment = 20;
     post.retweet = 15;

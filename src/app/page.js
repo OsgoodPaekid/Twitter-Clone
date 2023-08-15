@@ -1,4 +1,5 @@
 import { FeedItem } from "@/components/feed";
+import { CreateTweet } from "@/components/createTweet";
 
 const getPostsData = async () => {
   const res = await fetch("http://localhost:3333/tweets");
@@ -25,6 +26,7 @@ export default async function Home() {
 
   return (
     <div>
+      <CreateTweet />
       <div className="flex flex-col space-y-6 px-2 max-h-screen overflow-scroll">
         {tweetWithUser.map((post) => {
           return <FeedItem key={post.id} {...post} />;

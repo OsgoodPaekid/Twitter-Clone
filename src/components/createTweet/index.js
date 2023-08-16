@@ -9,12 +9,18 @@ import { CiLocationOn } from "react-icons/ci";
 export function CreateTweet() {
   return (
     <div>
-      <input
-        type="text"
-        placeholder="What's happening"
-        className="mb-10"
-      ></input>
-      <div className="flex justify-start ml-4 mt-10 mb-4 gap-4">
+      <div className="flex">
+        <img
+          src={"https://i.pravatar.cc/100"}
+          className="h-10 rounded-full ml-4 mr-4"
+        ></img>
+        <textarea
+          rows={5}
+          cols={70}
+          placeholder={`What's happening?!`}
+        ></textarea>
+      </div>
+      <div className="flex justify-start ml-4 mt-4 mb-4 gap-4">
         <div>
           <GoFileMedia />
         </div>
@@ -33,7 +39,7 @@ export function CreateTweet() {
         <div>
           <CiLocationOn />
         </div>
-        <button className="bg-blue-300 p-1 text-sm text-white rounded-full text-center pl-8 pr-8 ml-64">
+        <button className="bg-blue-300 p-1 text-sm text-white rounded-full text-center pl-6 pr-6 ml-64">
           Tweet
         </button>
       </div>

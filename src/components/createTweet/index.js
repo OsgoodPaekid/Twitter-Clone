@@ -1,4 +1,3 @@
-"use-client";
 import { GoFileMedia } from "react-icons/go";
 import { MdOutlineGifBox } from "react-icons/md";
 import { BiPoll } from "react-icons/bi";
@@ -7,6 +6,8 @@ import { AiOutlineSchedule } from "react-icons/ai";
 import { CiLocationOn } from "react-icons/ci";
 
 export function CreateTweet() {
+  const defaultIconSize = 16;
+  const defaultColor = "blue";
   return (
     <div>
       <div className="flex">
@@ -15,31 +16,31 @@ export function CreateTweet() {
           className="h-10 rounded-full ml-4 mr-4"
         ></img>
         <textarea
-          rows={5}
+          rows={3}
           cols={70}
           placeholder={`What's happening?!`}
         ></textarea>
       </div>
-      <div className="flex justify-start ml-4 mt-4 mb-4 gap-4">
+      <div className="flex justify-start ml-20 mt-2 mb-2 gap-4">
         <div>
-          <GoFileMedia />
+          <GoFileMedia size={defaultIconSize} color={defaultColor} />
         </div>
         <div>
-          <MdOutlineGifBox />
+          <MdOutlineGifBox size={defaultIconSize} color={defaultColor} />
         </div>
         <div>
-          <BiPoll />
+          <BiPoll size={defaultIconSize} color={defaultColor} />
         </div>
         <div>
-          <BsEmojiSmile />
+          <BsEmojiSmile size={defaultIconSize} color={defaultColor} />
         </div>
         <div>
-          <AiOutlineSchedule />
+          <AiOutlineSchedule size={defaultIconSize} color={defaultColor} />
         </div>
         <div>
-          <CiLocationOn />
+          <CiLocationOn size={defaultIconSize} color={defaultColor} />
         </div>
-        <button className="bg-blue-300 p-1 text-sm text-white rounded-full text-center pl-6 pr-6 ml-64">
+        <button className="bg-blue-300 p-1 text-sm text-white rounded-full text-center pl-4 pr-4 ml-64">
           Tweet
         </button>
       </div>

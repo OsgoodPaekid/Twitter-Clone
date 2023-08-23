@@ -26,8 +26,8 @@ export default async function Home() {
 
   return (
     <div>
-      <CreateTweet />
       <div className="flex flex-col space-y-6 px-2 max-h-screen overflow-scroll">
+        <CreateTweet />
         {tweetWithUser.map((post) => {
           return <FeedItem key={post.id} {...post} />;
         })}

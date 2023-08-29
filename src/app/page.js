@@ -1,28 +1,33 @@
 import { FeedItem } from "@/components/feed";
 import { CreateTweet } from "@/components/createTweet";
 
-const getPostsData = async () => {
-  const res = await fetch("http://localhost:3333/tweets");
+const getPostsData = async (page, limit) => {
+  const res = await fetch(
+    `http://localhost:3333/tweets?_page=${page}&_limit=${limit}`
+  );
   return res.json();
 };
 
-const getUsersData = async () => {
-  const res = await fetch("http://localhost:3333/users");
+const getUsersData = async (userId) => {
+  const res = await fetch(`http://localhost:3333/users/${userId}`);
   return res.json();
 };
 
 export default async function Home() {
-  const [posts, users] = await Promise.all([getPostsData(), getUsersData()]);
-  let tweetWithUser = [];
+  const tweets = await getPostsData(1, 20);
 
-  tweetWithUser = posts.map((post) => {
-    post.user = users.find((user) => user.id === post.userId);
-    post.avatar = "https://i.pravatar.cc/100";
-    post.comment = 20;
-    post.retweet = 15;
-    post.likes = 45;
-    return post;
-  });
+  const tweetWithUser = [];
+
+  for (const tweet of tweets) {
+    const user = await getUsersData(tweet.userId);
+    tweet.user = user;
+    tweet.avatar = "https://i.pravatar.cc/100";
+    tweet.comment = 13;
+    tweet.retweet = 31;
+    tweet.likes = 80;
+    tweet.tweetImpressions = 2516;
+    tweetWithUser.push(tweet);
+  }
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import { Follow } from "@/components/Follow";
+import { Follow } from "@/app/Follow";
 
 const getUsersData = async (limit) => {
   const res = await fetch(`http://localhost:3333/users?_limit=${limit}`);

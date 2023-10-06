@@ -1,33 +1,52 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FeedItem } from "@/components/feed";
 import { CreateTweet } from "@/components/createTweet";
 
-const getPostsData = async () => {
-  const res = await fetch(`http://localhost:3333/tweets`);
-  return res.json();
-};
+export default function Home() {
+  const [tweets, setTweets] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [tweetWithUser, setTweetWithUser] = useState([]);
 
-const getUsersData = async (userId) => {
-  const res = await fetch(`http://localhost:3333/users/${userId}`);
-  return res.json();
-};
+  useEffect(async function getPostsData() {
+    try {
+      const res = await fetch("http://localhost:3333/tweets");
+      const data = await res.json();
+      setTweets(data);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  }, []);
 
-export default async function Home() {
-  const tweets = await getPostsData();
+  useEffect(async function getUsersData() {
+    try {
+      const res = await fetch("http://localhost:3333/users");
+      const data = await res.json();
+      setUsers(data);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  }, []);
 
-  const tweetWithUser = [];
+  useEffect(() => {
+    const updatedTweetWithUser = [];
 
-  for (const tweet of tweets) {
-    const user = await getUsersData(tweet.userId);
-    tweet.user = user;
-    tweet.avatar = "https://i.pravatar.cc/100";
-    tweet.comment = 13;
-    tweet.retweet = 31;
-    tweet.likes = 80;
-    tweet.tweetImpressions = 2516;
-    tweetWithUser.push(tweet);
-  }
+    for (const tweet of tweets) {
+      const user = users.find((u) => u.id === tweet.userId);
+      const updatedTweet = {
+        ...tweet,
+        user,
+        avatar: "https://i.pravatar.cc/100",
+        comment: 13,
+        retweet: 31,
+        likes: 80,
+        tweetImpressions: 2516,
+      };
+      updatedTweetWithUser.push(updatedTweet);
+    }
+
+    setTweetWithUser(updatedTweetWithUser);
+  }, [tweets, users]);
 
   const [currentPage, setCurrentPage] = useState(1);
 

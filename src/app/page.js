@@ -2,94 +2,81 @@
 import { useState, useEffect } from "react";
 import { FeedItem } from "@/components/feed";
 import { CreateTweet } from "@/components/createTweet";
+import PaginationComponent from "@/components/paginationComponents";
+
+export const getUsersData = async () => {
+  const res = await fetch(`http://localhost:3333/users`);
+  const data = res.json();
+  return data;
+};
+
+export const getPostsData = async (pageNumber, perPage = 20) => {
+  const res = await fetch(
+    `http://localhost:3333/tweets?_limit=${perPage}&_page=${pageNumber}`,
+    { cache: "no-store" }
+  );
+  return res.json();
+};
 
 export default function Home() {
+  const [currentPageNumber, setCurrentPageNumber] = useState(1);
   const [tweets, setTweets] = useState([]);
-  const [users, setUsers] = useState([]);
-  const [tweetWithUser, setTweetWithUser] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
-  useEffect(async function getPostsData() {
-    try {
-      const res = await fetch("http://localhost:3333/tweets");
-      const data = await res.json();
-      setTweets(data);
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-    }
-  }, []);
+  async function goNext() {
+    setCurrentPageNumber((current) => current + 1);
+  }
 
-  useEffect(async function getUsersData() {
-    try {
-      const res = await fetch("http://localhost:3333/users");
-      const data = await res.json();
-      setUsers(data);
-    } catch (error) {
-      console.error("Error fetching posts:", error);
+  async function goPrev() {
+    if (currentPageNumber > 1) {
+      setCurrentPageNumber((current) => current - 1);
     }
-  }, []);
+  }
+
+  const getTweetsWithUsers = async () => {
+    setLoading(true);
+    const [posts, users] = await Promise.all([
+      getPostsData(currentPageNumber),
+      getUsersData(),
+    ]);
+    let tweetWithUser = [];
+
+    tweetWithUser = posts.map((post) => {
+      post.user = users.find((user) => user.id === post.userId);
+      post.avatar = "https://i.pravatar.cc/100";
+      post.comment = 20;
+      post.retweet = 15;
+      post.likes = 45;
+      return post;
+    });
+
+    setTweets(tweetWithUser);
+    setLoading(false);
+  };
 
   useEffect(() => {
-    const updatedTweetWithUser = [];
+    console.log(currentPageNumber);
+    getTweetsWithUsers();
+  }, [currentPageNumber]);
 
-    for (const tweet of tweets) {
-      const user = users.find((u) => u.id === tweet.userId);
-      const updatedTweet = {
-        ...tweet,
-        user,
-        avatar: "https://i.pravatar.cc/100",
-        comment: 13,
-        retweet: 31,
-        likes: 80,
-        tweetImpressions: 2516,
-      };
-      updatedTweetWithUser.push(updatedTweet);
-    }
-
-    setTweetWithUser(updatedTweetWithUser);
-  }, [tweets, users]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const totalPosts = tweetWithUser.length;
-  const pageSize = 20;
-  const pages = Math.floor(totalPosts / pageSize);
-
-  const goToPrev = () => {
-    const prevPage = Math.max(currentPage - 1, 1);
-    setCurrentPage(prevPage);
-  };
-
-  const goToNext = () => {
-    const nextPage = Math.min(currentPage + 1, pages);
-    setCurrentPage(nextPage);
-  };
-
-  const start = pageSize * (currentPage - 1);
-  const end = pageSize * currentPage;
-  const postsPerPage = tweetWithUser.slice(start, end);
-
-  const canGoPrev = currentPage > 1;
-  const canGoNext = currentPage < pages;
+  if (isLoading) {
+    return (
+      <div>
+        <p>Loading ...</p>
+      </div>
+    );
+  }
 
   return (
     <div>
       <div className="flex flex-col space-y-6 px-2 max-h-screen overflow-scroll">
         <CreateTweet />
-        {postsPerPage.map((post) => {
+        {tweets.map((post) => {
           return <FeedItem key={post.id} {...post} />;
         })}
       </div>
-      <div className="flex">
-        <button disabled={!canGoPrev} onClick={goToPrev}>
-          prev
-        </button>
-        <p>
-          {currentPage} of {pages}
-        </p>
-        <button disabled={!canGoNext} onClick={goToNext}>
-          next
-        </button>
-      </div>
+
+      <PaginationComponent goNext={goNext} goPrev={goPrev} />
     </div>
   );
 }

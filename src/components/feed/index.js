@@ -16,7 +16,7 @@ export function FeedItem(props) {
           <div>
             <div className="flex ">
               <div className="font-bold pr-2">{props.user.name}</div>
-              <div>{props.user.screen_name}</div>
+              <div>@{props.user.screen_name}</div>
               <span className="pl-2">{formatDate(props.created_at)}</span>
             </div>
             <div>{props.text}</div>

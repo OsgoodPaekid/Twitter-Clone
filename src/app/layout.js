@@ -1,7 +1,7 @@
 import { Sidebar } from "@/components/sidebar";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { WhoToFollow } from "./follow/page";
+import { WhoToFollowWidget } from "../components/follow";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
           </div>
           <div className="w-1/2">{children}</div>
           <div className="w-1/4 border-l border-gray-300">
-            <WhoToFollow />
+            <WhoToFollowWidget />
           </div>
         </div>
       </body>

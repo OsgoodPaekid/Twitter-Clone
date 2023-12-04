@@ -1,4 +1,4 @@
-export function Follow(props) {
+export function WhoToFollow(props) {
   return (
     <div>
       <section>
